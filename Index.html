@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .responsive-img { width: 100%; height: auto; }
+        .banner {
+            background-color: pink;
+            color: #721c24;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="caixa">
+        <h1 class="centralizado">Bem-vindo ao restaurante Sabores da Terra</h1>
+        <h2>Escolha certa para agradar o seu paladar</h2>
+        <h2>Teu estômago merece o melhor</h2>
+        <p>
+            <h2><a href="pagina1.html">Menu</a></h2>
+            <h2><a href="Pagina de Reserva.html">Reservas</a></h2>
+            <h2><a href="Contactos.html">Contactos</a></h2>
+            <h2><a href="Sobre_Nos.html">Sobre Nós</a></h2>
+            <h2><a href="Missao.html">Missão</a></h2>
+        </p>
+        <div class="banner" id="promo-banner">
+            Carregando promoções...
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const promoBanner = document.getElementById('promo-banner');
+
+            function getPromotion() {
+                const now = new Date();
+                const dayOfWeek = now.getDay(); // 0 (Domingo) a 6 (Sábado)
+                const hour = now.getHours();
+
+                let promotion = '';
+
+                switch (dayOfWeek) {
+                    case 0: // Domingo
+                        promotion = 'Domingo: Desconto de 15% em todos os pratos!';
+                        break;
+                    case 1: // Segunda-feira
+                        promotion = 'Segunda-feira: Desconto de 10% no prato de Frango e Xima!';
+                        break;
+                    case 2: // Terça-feira
+                        promotion = 'Terça-feira: Bebida grátis com qualquer prato principal!';
+                        break;
+                    case 3: // Quarta-feira
+                        promotion = 'Quarta-feira: Desconto de 20% em pratos vegetarianos!';
+                        break;
+                    case 4: // Quinta-feira
+                        promotion = 'Quinta-feira: Sobremesa grátis com qualquer refeição!';
+                        break;
+                    case 5: // Sexta-feira
+                        promotion = 'Sexta-feira: Desconto de 10% em pratos Onivoros!';
+                        break;
+                    case 6: // Sábado
+                        promotion = 'Sábado: Desconto de 5% em todas as refeições!';
+                        break;
+                }
+
+                // Promoção adicional baseada na hora do dia
+                if (hour >= 17 && hour <= 19) {
+                    promotion += ' Happy Hour: Bebidas pela metade do preço!';
+                }
+
+                return promotion;
+            }
+
+            function updatePromotion() {
+                promoBanner.textContent = getPromotion();
+            }
+
+            // Atualiza a promoção ao carregar a página
+            updatePromotion();
+
+            // Atualiza a promoção a cada hora
+            setInterval(updatePromotion, 3600000); // 3600000 ms = 1 hora
+        });
+    </script>
+</body>
+</html>

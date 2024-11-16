@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Reservas</title>
+    <style>
+        .error { color: red; }
+        
+        .success {
+            color: green;
+        }
+        body {background-color: rgba(211, 207, 207, 0.801)}
+    </style>
+</head>
+<body>
+    
+    <h1>Formulário de Reservas</h1>
+    <form id="reservaForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" required><br><br>
+
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" required><br><br>
+
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" name="hora" required><br><br>
+
+        <label for="pessoas">Número de Pessoas:</label>
+        <input type="number" id="pessoas" name="pessoas" required min="1" max="100"><br><br>
+
+        <button type="submit">Reservar</button>
+    </form>
+
+    <p id="mensagem" class="error"></p>
+
+    <script>
+        document.getElementById('reservaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone').value;
+            const data = document.getElementById('data').value;
+            const hora = document.getElementById('hora').value;
+            const pessoas = document.getElementById('pessoas').value;
+
+            if (!nome || !email || !telefone || !data || !hora || !pessoas) {
+                document.getElementById('mensagem').textContent = 'Por favor, preencha todos os campos.';
+                return;
+            }
+
+            const dataAtual = new Date();
+            const dataReserva = new Date(`${data}T${hora}`);
+
+            if (dataReserva < dataAtual) {
+                document.getElementById('mensagem').textContent = 'A data e hora da reserva devem ser futuras.';
+                return;
+            }
+
+            document.getElementById('mensagem').textContent = 'Reserva recebida com sucesso!';
+            document.getElementById('mensagem').classList.remove('error');
+            document.getElementById('mensagem').classList.add('success');
+        });
+    </script>
+    <p><a href="Index.html">Voltar à página inicial</a></p>
+</body>
+</html>
